@@ -58,8 +58,8 @@ export default function TimelineTalentPage() {
         <Timeline>
           <TimelineYear yearMonth={data.yearMonth} />
           <TimelineMonths yearMonth={data.yearMonth} />
-          {data.groups.map((g) => (
-            <TimelineGroup key={g.id} group={g} />
+          {data.groups.map((g, i) => (
+            <TimelineGroup key={g.id + i} group={g} />
           ))}
         </Timeline>
       </div>

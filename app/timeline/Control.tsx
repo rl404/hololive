@@ -31,7 +31,7 @@ export default function Control({
       <div className="absolute top-1/2 -z-50 h-full w-full border-t border-border bg-background" />
       <TooltipProvider delayDuration={0}>
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <Button
               variant="outline"
               size="icon"
@@ -46,7 +46,7 @@ export default function Control({
       </TooltipProvider>
       <TooltipProvider delayDuration={0}>
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <Button
               variant="outline"
               size="icon"
@@ -64,7 +64,7 @@ export default function Control({
       </Button>
       <TooltipProvider delayDuration={0}>
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <Button
               variant="outline"
               size="icon"
@@ -79,7 +79,7 @@ export default function Control({
       </TooltipProvider>
       <TooltipProvider delayDuration={0}>
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <Button
               variant="outline"
               size="icon"

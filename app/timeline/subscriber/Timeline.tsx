@@ -1,6 +1,12 @@
 import { useCtx } from "../context";
 import { TimelineData } from "./types";
 import { subsSorter } from "./utils";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/src/components/ui/tooltip";
 import { cn, compactInt, isActive, isRetired } from "@/src/libs/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -77,18 +83,24 @@ function TimelineTalent({
       animate={{ opacity: 1, height: "auto" }}
       exit={{ opacity: 0, height: 0 }}
     >
-      <motion.img
-        key={talent.id}
-        src={`/images/talents/${talent.id}/avatar.webp`}
-        alt={talent.name}
-        className={cn(
-          "h-10 rounded-lg transition-all",
-          isRetired(talent, ctx.year, ctx.month) && "grayscale",
-        )}
-        initial={{ opacity: 0, width: 0 }}
-        animate={{ opacity: 1, width: "auto" }}
-        exit={{ opacity: 0, width: 0 }}
-      />
+      <TooltipProvider key={talent.id} delayDuration={0}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <motion.img
+              src={`/images/talents/${talent.id}/avatar.webp`}
+              alt={talent.name}
+              className={cn(
+                "h-10 rounded-lg transition-all",
+                isRetired(talent, ctx.year, ctx.month) && "grayscale",
+              )}
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: "auto" }}
+              exit={{ opacity: 0, width: 0 }}
+            />
+          </TooltipTrigger>
+          <TooltipContent side="right">{talent.name}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <motion.div
         className={cn(
           "h-1/2 rounded-r-lg",

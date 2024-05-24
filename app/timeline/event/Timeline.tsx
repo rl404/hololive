@@ -113,13 +113,15 @@ export function TimelineEvent({
       className="cursor-pointer hover:bg-accent"
     >
       <CardHeader>
-        <CardTitle>{event.name}</CardTitle>
-        <CardDescription className="flex gap-1">
-          <Badge className={event.badgeColor}>{event.sourceName}</Badge>
-          <Badge className={EventColor[event.type]}>
-            {EventString[event.type]}
-          </Badge>
-        </CardDescription>
+        <CardTitle className="flex flex-col gap-1">
+          <span>{event.name}</span>
+          <div className="flex gap-1">
+            <Badge className={event.badgeColor}>{event.sourceName}</Badge>
+            <Badge className={EventColor[event.type]}>
+              {EventString[event.type]}
+            </Badge>
+          </div>
+        </CardTitle>
       </CardHeader>
       <CardContent className={!show ? "hidden" : ""}>
         <p>{event.description}</p>

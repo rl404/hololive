@@ -9,13 +9,20 @@ import {
   TimelineMonth,
   TimelineYear,
 } from "./Timeline";
+import { TimelineData } from "./types";
 import { getTimelineData } from "./utils";
 import { MonthNames } from "@/src/const";
 import { scrollToID } from "@/src/libs/utils";
+import { useEffect, useState } from "react";
 
 export default function TimelineEventPage() {
   const ctx = useCtx();
-  const data = getTimelineData();
+
+  const [data, setData] = useState<TimelineData>({});
+
+  useEffect(() => {
+    setData(getTimelineData());
+  }, []);
 
   const onFirst = () => {
     const year = Object.keys(data)[0];

@@ -1,4 +1,10 @@
 import { MonthData } from "./types";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/src/components/ui/tooltip";
 import { DayNames, MonthNames } from "@/src/const";
 import { Talents } from "@/src/data/talents/talents";
 import { cn, isRetired } from "@/src/libs/utils";
@@ -70,7 +76,7 @@ export default function CalendarMonth({ month }: { month: number }) {
       </h2>
       {DayNames.map((d, i) => (
         <div
-          key={d}
+          key={MonthNames[month] + d}
           className={cn(
             "text-muted-foreground",
             (i === 0 || i === DayNames.length - 1) && "text-red-400",
@@ -82,14 +88,14 @@ export default function CalendarMonth({ month }: { month: number }) {
       <div className="col-span-7 h-px bg-border" />
       {data.map((d) => (
         <div
-          key={d.date}
+          key={MonthNames[month] + d.date + d.spillOver}
           id={
             today.getMonth() === month && today.getDate() === d.date
               ? "today"
               : ""
           }
           className={cn(
-            "relative flex aspect-square size-36 flex-wrap items-center justify-center gap-2 rounded-lg bg-accent p-2",
+            "relative flex aspect-square size-40 flex-wrap items-center justify-center rounded-lg bg-accent p-2",
             d.spillOver && "opacity-30",
             today.getMonth() === month &&
               today.getDate() === d.date &&
@@ -97,37 +103,52 @@ export default function CalendarMonth({ month }: { month: number }) {
           )}
         >
           <div className="absolute left-0 top-0 p-2">{d.date}</div>
-          {d.birthday.map((talent) => (
-            <div
-              key={talent.id}
-              className="rounded-lg outline outline-blue-500"
-            >
-              <img
-                src={`/images/talents/${talent.id}/avatar.webp`}
-                alt={talent.name}
-                className={cn(
-                  "h-10 rounded-lg",
-                  isRetired(talent, year, month) && "grayscale",
-                )}
-              />
-            </div>
-          ))}
-          {d.anniversary.map((talent) => (
-            <div
-              key={talent.id}
-              className="rounded-lg outline outline-green-500"
-            >
-              <img
-                key={talent.id}
-                src={`/images/talents/${talent.id}/avatar.webp`}
-                alt={talent.name}
-                className={cn(
-                  "h-10 rounded-lg",
-                  isRetired(talent, year, month) && "grayscale",
-                )}
-              />
-            </div>
-          ))}
+          <div className="flex flex-wrap items-start justify-center gap-2">
+            {d.birthday.map((talent) => (
+              <div
+                key={"birthday-" + talent.id}
+                className="rounded-lg outline outline-blue-500"
+              >
+                <TooltipProvider delayDuration={0}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <img
+                        src={`/images/talents/${talent.id}/avatar.webp`}
+                        alt={talent.name}
+                        className={cn(
+                          "h-10 rounded-lg",
+                          isRetired(talent, year, month) && "grayscale",
+                        )}
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom">{talent.name}</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+            ))}
+            {d.anniversary.map((talent) => (
+              <div
+                key={"anniv-" + talent.id}
+                className="rounded-lg outline outline-green-500"
+              >
+                <TooltipProvider delayDuration={0}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <img
+                        src={`/images/talents/${talent.id}/avatar.webp`}
+                        alt={talent.name}
+                        className={cn(
+                          "h-10 rounded-lg",
+                          isRetired(talent, year, month) && "grayscale",
+                        )}
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom">{talent.name}</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+            ))}
+          </div>
         </div>
       ))}
     </div>

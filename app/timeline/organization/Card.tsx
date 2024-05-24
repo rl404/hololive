@@ -1,4 +1,10 @@
 import { useCtx } from "../context";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/src/components/ui/tooltip";
 import { Group } from "@/src/data/types";
 import { cn, isActive } from "@/src/libs/utils";
 import { AnimatePresence, motion } from "framer-motion";
@@ -29,22 +35,30 @@ export default function Card({ group }: { group: Group }) {
           </div>
           {group.talents.filter((t) => isActive(t, ctx.year, ctx.month))
             .length > 0 && (
-            <div className="flex h-full items-center justify-center gap-2 p-2">
+            <div className="flex h-full flex-wrap items-center justify-center gap-2 p-2">
               <AnimatePresence>
                 {group.talents
                   .sort((a, b) => (a.startDate < b.startDate ? -1 : 1))
                   .map(
                     (talent) =>
                       isActive(talent, ctx.year, ctx.month) && (
-                        <motion.img
-                          key={talent.id}
-                          src={`/images/talents/${talent.id}/avatar.webp`}
-                          alt={talent.name}
-                          className="h-10 rounded-lg"
-                          initial={{ opacity: 0, width: 0 }}
-                          animate={{ opacity: 1, width: "auto" }}
-                          exit={{ opacity: 0, width: 0 }}
-                        />
+                        <TooltipProvider key={talent.id} delayDuration={0}>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <motion.img
+                                src={`/images/talents/${talent.id}/avatar.webp`}
+                                alt={talent.name}
+                                className="h-10 rounded-lg"
+                                initial={{ opacity: 0, width: 0 }}
+                                animate={{ opacity: 1, width: "auto" }}
+                                exit={{ opacity: 0, width: 0 }}
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent side="bottom">
+                              {talent.name}
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
                       ),
                   )}
               </AnimatePresence>
@@ -53,9 +67,9 @@ export default function Card({ group }: { group: Group }) {
           {group.groups.filter((g) => isActive(g, ctx.year, ctx.month)).length >
             0 && (
             <div className="flex flex-wrap gap-2 p-2">
-              {group.groups.map((g) => (
+              {group.groups.map((g, i) => (
                 <Card
-                  key={g.id}
+                  key={g.id + i}
                   group={{
                     ...g,
                     badgeColor: g.badgeColor || group.badgeColor,

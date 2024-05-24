@@ -78,12 +78,16 @@ const config = {
       },
       backgroundImage: {
         hololive: "url(/bg/logo-full.webp)",
+        vtuber:
+          "url(https://api.randomizer.rl404.com/user/rl404_vtuber/image.jpg)",
       },
       backgroundSize: {
         hololive: "30%",
+        vtuber: "cover",
       },
       backgroundPosition: {
         hololive: "center",
+        vtuber: "center",
       },
     },
   },

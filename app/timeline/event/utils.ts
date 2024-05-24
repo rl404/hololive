@@ -39,7 +39,8 @@ export const getYearMonths = (startDate: Date, endDate: Date): YearMonth => {
 
 export const getTimelineData = (): TimelineData => {
   const events: TimelineEventData[] = getEventsRecursive(CoverCorp).sort(
-    (a, b) => (a.date < b.date ? -1 : 1),
+    (a, b) =>
+      a.date == b.date ? (a.id < b.id ? -1 : 1) : a.date < b.date ? -1 : 1,
   );
 
   const data: TimelineData = Object.entries(

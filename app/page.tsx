@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <>
-      <div className="fixed left-0 top-0 -z-10 h-full w-full bg-hololive bg-no-repeat opacity-15" />
+      <div className="bg-vtuber fixed left-0 top-0 -z-10 h-full w-full bg-no-repeat opacity-15" />
       <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
         <div className="flex flex-col gap-4 text-center">
           <h1>Hololive Timeline</h1>

@@ -11,8 +11,8 @@ export default function CalendarPage() {
         <h1>Hololive Birthday & Anniversary Calendar</h1>
       </div>
       <div className="flex flex-wrap justify-center gap-2">
-        {MonthNames.map((_, i) => (
-          <CalendarMonth key={i} month={i} />
+        {MonthNames.map((m, i) => (
+          <CalendarMonth key={m} month={i} />
         ))}
       </div>
       <div className="fixed bottom-0 right-0 flex flex-col gap-4 p-4 text-center">
