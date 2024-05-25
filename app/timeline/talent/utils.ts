@@ -51,15 +51,6 @@ export const getTimelineData = (): TimelineData => {
     yearMonth: yearMonth,
     groups: groups.map((g) => ({
       ...g,
-      talents: g.talents.sort((a, b) =>
-        a.startDate == b.startDate
-          ? a.name < b.name
-            ? -1
-            : 1
-          : a.startDate < b.startDate
-            ? -1
-            : 1,
-      ),
       colSpanBefore: getMonthDiff(stardDate, g.startDate),
       colSpan: getMonthDiff(g.startDate, g.endDate || endDate) + 1,
       colSpanAfter: getMonthDiff(g.endDate || endDate, endDate),

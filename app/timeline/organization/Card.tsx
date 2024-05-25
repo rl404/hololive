@@ -38,7 +38,6 @@ export default function Card({ group }: { group: Group }) {
             <div className="flex h-full flex-wrap items-center justify-center gap-2 p-2">
               <AnimatePresence>
                 {group.talents
-                  .sort((a, b) => (a.startDate < b.startDate ? -1 : 1))
                   .filter((talent) => isActive(talent, ctx.year, ctx.month))
                   .map((talent) => (
                     <TooltipProvider key={talent.id} delayDuration={0}>
