@@ -130,20 +130,19 @@ export function TimelineGroup({
                 </Badge>
               </div>
               <AnimatePresence>
-                {group.talents.map(
-                  (talent) =>
-                    isActive(talent, ctx.year, ctx.month) && (
-                      <motion.img
-                        key={talent.id}
-                        src={`/images/talents/${talent.id}/avatar.webp`}
-                        alt={talent.name}
-                        className="h-10 rounded-lg"
-                        initial={{ opacity: 0, width: 0 }}
-                        animate={{ opacity: 1, width: "auto" }}
-                        exit={{ opacity: 0, width: 0 }}
-                      />
-                    ),
-                )}
+                {group.talents
+                  .filter((talent) => isActive(talent, ctx.year, ctx.month))
+                  .map((talent) => (
+                    <motion.img
+                      key={talent.id}
+                      src={`/images/talents/${talent.id}/avatar.webp`}
+                      alt={talent.name}
+                      className="h-10 rounded-lg"
+                      initial={{ opacity: 0, width: 0 }}
+                      animate={{ opacity: 1, width: "auto" }}
+                      exit={{ opacity: 0, width: 0 }}
+                    />
+                  ))}
               </AnimatePresence>
             </div>
             <div

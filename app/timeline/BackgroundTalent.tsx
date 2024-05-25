@@ -8,28 +8,28 @@ export default function BackgroundTalent() {
   return (
     <div className="fixed left-0 top-0 -z-10 flex h-screen w-screen items-center justify-center p-4">
       <div className="flex max-w-7xl flex-wrap items-center justify-center">
-        {Talents.map((talent) => (
-          <AnimatePresence key={talent.id}>
-            {isActive(talent, ctx.year, ctx.month) && (
-              <motion.div
-                className="flex size-20 items-center justify-center"
+        <AnimatePresence>
+          {Talents.filter((talent) =>
+            isActive(talent, ctx.year, ctx.month),
+          ).map((talent) => (
+            <motion.div
+              key={talent.id}
+              className="flex size-20 items-center justify-center"
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: "5rem" }}
+              exit={{ opacity: 0, width: 0 }}
+            >
+              <motion.img
+                src={`/images/talents/${talent.id}/model-main.webp`}
+                alt={talent.name}
+                className="h-60 max-w-none object-cover"
                 initial={{ opacity: 0, width: 0 }}
-                animate={{ opacity: 1, width: "5rem" }}
+                animate={{ opacity: 1, width: "auto" }}
                 exit={{ opacity: 0, width: 0 }}
-              >
-                <motion.img
-                  src={`/images/talents/${talent.id}/model-main.webp`}
-                  alt={talent.name}
-                  className="h-60 max-w-none object-cover"
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: "auto" }}
-                  exit={{ opacity: 0, width: 0 }}
-                />
-              </motion.div>
-            )}
-            ,
-          </AnimatePresence>
-        ))}
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
       <div className="fixed left-0 top-0 h-full w-full bg-background opacity-85" />
     </div>

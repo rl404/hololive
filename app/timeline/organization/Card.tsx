@@ -39,28 +39,26 @@ export default function Card({ group }: { group: Group }) {
               <AnimatePresence>
                 {group.talents
                   .sort((a, b) => (a.startDate < b.startDate ? -1 : 1))
-                  .map(
-                    (talent) =>
-                      isActive(talent, ctx.year, ctx.month) && (
-                        <TooltipProvider key={talent.id} delayDuration={0}>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <motion.img
-                                src={`/images/talents/${talent.id}/avatar.webp`}
-                                alt={talent.name}
-                                className="h-10 rounded-lg"
-                                initial={{ opacity: 0, width: 0 }}
-                                animate={{ opacity: 1, width: "auto" }}
-                                exit={{ opacity: 0, width: 0 }}
-                              />
-                            </TooltipTrigger>
-                            <TooltipContent side="bottom">
-                              {talent.name}
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      ),
-                  )}
+                  .filter((talent) => isActive(talent, ctx.year, ctx.month))
+                  .map((talent) => (
+                    <TooltipProvider key={talent.id} delayDuration={0}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <motion.img
+                            src={`/images/talents/${talent.id}/avatar.webp`}
+                            alt={talent.name}
+                            className="h-10 rounded-lg"
+                            initial={{ opacity: 0, width: 0 }}
+                            animate={{ opacity: 1, width: "auto" }}
+                            exit={{ opacity: 0, width: 0 }}
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent side="bottom">
+                          {talent.name}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  ))}
               </AnimatePresence>
             </div>
           )}
