@@ -20,7 +20,7 @@ export default function BackgroundTalent() {
               exit={{ opacity: 0, width: 0 }}
             >
               <motion.img
-                src={`/images/talents/${talent.id}/model-main.webp`}
+                src={`/assets/images/talents/${talent.id}/model-main.webp`}
                 alt={talent.name}
                 className="h-60 max-w-none object-cover"
                 initial={{ opacity: 0, width: 0 }}

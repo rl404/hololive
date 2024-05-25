@@ -44,7 +44,7 @@ export default function Card({ group }: { group: Group }) {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <motion.img
-                            src={`/images/talents/${talent.id}/avatar.webp`}
+                            src={`/assets/images/talents/${talent.id}/avatar.webp`}
                             alt={talent.name}
                             className="h-10 rounded-lg"
                             initial={{ opacity: 0, width: 0 }}

@@ -135,7 +135,7 @@ export function TimelineGroup({
                   .map((talent) => (
                     <motion.img
                       key={talent.id}
-                      src={`/images/talents/${talent.id}/avatar.webp`}
+                      src={`/assets/images/talents/${talent.id}/avatar.webp`}
                       alt={talent.name}
                       className="h-10 rounded-lg"
                       initial={{ opacity: 0, width: 0 }}

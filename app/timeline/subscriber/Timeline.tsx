@@ -87,7 +87,7 @@ function TimelineTalent({
         <Tooltip>
           <TooltipTrigger asChild>
             <motion.img
-              src={`/images/talents/${talent.id}/avatar.webp`}
+              src={`/assets/images/talents/${talent.id}/avatar.webp`}
               alt={talent.name}
               className={cn(
                 "h-10 rounded-lg transition-all",

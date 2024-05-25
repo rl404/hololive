@@ -113,7 +113,7 @@ export default function CalendarMonth({ month }: { month: number }) {
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <img
-                        src={`/images/talents/${talent.id}/avatar.webp`}
+                        src={`/assets/images/talents/${talent.id}/avatar.webp`}
                         alt={talent.name}
                         className={cn(
                           "h-10 rounded-lg",
@@ -135,7 +135,7 @@ export default function CalendarMonth({ month }: { month: number }) {
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <img
-                        src={`/images/talents/${talent.id}/avatar.webp`}
+                        src={`/assets/images/talents/${talent.id}/avatar.webp`}
                         alt={talent.name}
                         className={cn(
                           "h-10 rounded-lg",
