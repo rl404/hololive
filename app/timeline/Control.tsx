@@ -13,6 +13,7 @@ import {
   DoubleArrowLeftIcon,
   DoubleArrowRightIcon,
 } from "@radix-ui/react-icons";
+import { useCallback, useEffect } from "react";
 
 export default function Control({
   onFirst,
@@ -26,9 +27,37 @@ export default function Control({
   onLast: () => void;
 }) {
   const ctx = useCtx();
+
+  const arrowKeyHandler = useCallback(
+    (event: KeyboardEvent) => {
+      switch (event.key) {
+        case "ArrowUp":
+          onFirst();
+          break;
+        case "ArrowDown":
+          onLast();
+          break;
+        case "ArrowLeft":
+          onPrevious();
+          break;
+        case "ArrowRight":
+          onNext();
+          break;
+      }
+    },
+    [onFirst, onPrevious, onNext, onLast],
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", arrowKeyHandler);
+    return () => {
+      window.removeEventListener("keydown", arrowKeyHandler);
+    };
+  }, [arrowKeyHandler]);
+
   return (
     <div className="fixed bottom-0 left-0 z-50 flex w-full items-center justify-center gap-2 p-4">
-      <div className="absolute top-1/2 -z-50 h-full w-full border-t border-border bg-background" />
+      <div className="absolute top-1/2 -z-50 h-full w-full items-center border-t border-border bg-background" />
       <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -59,9 +88,16 @@ export default function Control({
           <TooltipContent>go to previous month</TooltipContent>
         </Tooltip>
       </TooltipProvider>
-      <Button variant="outline" className="w-32">
-        {MonthNames[ctx.month]} {ctx.year}
-      </Button>
+      <TooltipProvider delayDuration={0}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" className="w-32">
+              {MonthNames[ctx.month]} {ctx.year}
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>you can also use arrow key to move</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger asChild>
