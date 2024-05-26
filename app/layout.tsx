@@ -9,8 +9,9 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Hololive",
-  description: "Hololive timeline, branches, talents, and events.",
+  title: "Hololive Timeline",
+  description:
+    "Hololive event, organization, subscriber, talent timelines and birthday & anniversary calendar.",
 };
 
 export default function RootLayout({
